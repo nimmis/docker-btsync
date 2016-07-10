@@ -31,10 +31,14 @@ to see the secret code to use on the other nodes, look at the log-output from th
 
 press CTRL-C to exit log
 
-## run container on more sunc nodes
+## run container on more sync nodes
 
-To get the other nodes to sync with the first they have to have the same secret key, you add the key with -e BTSYNC_SECRET=<secret key>, start with the secret code created by the first sync container. The local director does not have to be the same as on the first container but all sub-folders will be the same. So starting a second sync container
-on another docker machine using local directory /home/you/sync-backup and using the secret key obtained from the example above 
+To get the other nodes to sync with the first, they have to have the same secret key. 
+You add the key with -e BTSYNC_SECRET=<secret key>, start with the secret code created 
+by the first sync container. The local director does not have to be the same as on the 
+first container but all sub-folders will be the same. So starting a second sync container
+on another docker machine using local directory /home/you/sync-backup and using the secret
+key obtained from the first sync node example above 
 
 	docker run -d -v /home/you/sync-backup:/data --name syncnode2 -e BTSYNC_SECRET=AF2INNKYP672IGIIDTDWWVUBGP2AQRFKX nimmis/btsync
 
