@@ -44,3 +44,19 @@ key obtained from the first sync node example above
 
 NOTE!!!!! DO NOT USE the secret key in this example, use the one you got from the first sync node run.
 
+## nodes don't sync
+
+If the nimmis/btsync is started with another secret than the syncdirectory was first started with it will not start syncing,
+execute the following command on the sync container to check
+
+	docker exec  <syncname> grep MUTEX  /var/log/btsync.log
+
+if you get a hit on something that look like
+
+	[20160710 13:38:31.611] MUTEX[/data]: share id mismatch, ARGCQRK35Z3DH5DPNATQOCXREYS6ZYYJV != ATFQAUDKIQKHE4IHHHBV2EZFN4HNILPRK
+
+The sync data is not valid for the current key, just stop the container and remove old sync information
+
+	docker stop <syncname>
+	sudo rm -Rf <sync folder>/.sync
+        docker start <syncname>
