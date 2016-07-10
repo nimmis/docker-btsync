@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# set secret key for btsync
+#
+# (c) 2016 nimmis <kjell.havneskold@gmail.com>
+#
+
+if [ -z $BTSYNC_SECRET ]; then
+  BTSYNC_SECRET=`/usr/local/bin/btsync --generate-secret`
+  echo "add -e BTSYNC_SECRET=$BTSYNC_SECRET to your other nodes to sync"
+fi
+
+sed -i "s/MY_SECRET_1/$BTSYNC_SECRET/g" /etc/btsync/btsync.conf
+
